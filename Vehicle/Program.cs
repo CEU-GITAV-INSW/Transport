@@ -1,4 +1,11 @@
-﻿public class ElectricEngine
+﻿
+public interface IEngine
+{
+
+    public bool moveVehicle(int distance);
+    public void refuel();
+}
+public class ElectricEngine: IEngine
 {
     int autonomy = 0;
     public bool moveVehicle(int distance)
@@ -31,8 +38,9 @@
         Console.WriteLine();
     }
 }
-public class CombustionEngine
+public class CombustionEngine : IEngine
 {
+
     int autonomy = 0;
     public bool moveVehicle(int distance)
     {
@@ -71,14 +79,19 @@ public class Transport
 {
     int DistanceMoved { get; set; } = 0;
 
-    private String Name { get; set; }
+    public String Name { get; set; }
 
-    CombustionEngine Engine { get; set; }
+    IEngine Engine { get; set; }
+
+    public virtual IEngine CreateEngine()
+    {
+        return new CombustionEngine();
+    }
 
     public Transport(String name)
     {
         Name = name;
-        Engine = new CombustionEngine();
+        Engine = CreateEngine();
     }
 
     public void Move(int distance)
@@ -103,7 +116,7 @@ public class Transport
         Move(800);
         Console.WriteLine("Package delivered");
         Console.WriteLine();
-        Console.WriteLine($"Total of {DistanceMoved} km driven");
+        Console.WriteLine($"Total of {DistanceMoved} km driven by {Name}");
         Console.WriteLine();
 
     }
@@ -111,12 +124,39 @@ public class Transport
 
 }
 
+public class CombustionTransport: Transport
+{
+    public CombustionTransport(string name) : base(name)
+    {
+    }
+
+    public override IEngine CreateEngine()
+    {
+        return new CombustionEngine();
+    }
+
+}
+
+public class ElectricTransport : Transport
+{
+    public ElectricTransport(string name) : base(name)
+    {
+    }
+
+    public override IEngine CreateEngine()
+    {
+        return new ElectricEngine();
+    }
+
+}
+
 public class Program
 {
     public static void Main(string[] args)
     {
-
-        Transport t = new Transport("Tractor Amarillo");
-        t.Deliver();
+        Transport t1 = new ElectricTransport("BMW i8");
+        Transport t2 = new CombustionTransport("Mazda RX-8");
+        t1.Deliver();
+        t2.Deliver();
     }
 }
