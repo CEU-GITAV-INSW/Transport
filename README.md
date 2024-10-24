@@ -20,3 +20,5 @@ Este es el código de los métodos moveVehicle y refuel del motor de salto.
         Console.Write("No need for fuel");
     }
 
+
+Después de eso, crea una nueva subclase de Transport, llamada MagicTransport, que utilice este nuevo tipo de motor. En el main(), crea dos transportes de tipo MagicTransport y comprueba que utilizan el mismo motor. Para ello, puedes añadir un "print" dentro del constructor del motor de salto con un mensaje, que solo debería aparecer una vez si has implementado bien Singleton.
