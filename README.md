@@ -4,7 +4,7 @@ El motor de salto, que funciona sin combustible y mediante teleportación.
 Tiene la desventaja de que solo puede haber uno en el universo, pero como existe en 17 dimensiones, se puede compartir entre vehículos sin problema.
 
 
-Programa este nuevo tipo de motor (JumpEngine), que implementa la interfaz IEngine y el patrón Singleton.
+Programa este nuevo tipo de motor (JumpEngine), que implementa la interfaz IEngine y el patrón Singleton (https://refactoring.guru/design-patterns/singleton).
 
 Este es el código de los métodos moveVehicle y refuel del motor de salto.
 
